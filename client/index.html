@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>Bloging</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link rel="stylesheet" type="text/css" href="dist/sweetalert.css">
+</head>
+<body>
+  <nav class="light-blue lighten-1" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Welcome</a>
+      <a class="btn-floating btn-large halfway-fab waves-effect waves-light teal" id="btn-float" href="#input">
+        <i class="material-icons">add</i>
+      </a>
+    </div>
+  </nav>
+  <div id="root" class="container">
+    <div class="section no-pad-bot" v-for="data in articles">
+        <div class="col s12 m6">
+          <div class="card blue darken-1">
+            <div class="card-content white-text">
+              <span class="card-title">{{data.title}}</span>
+              <p>{{data.content}}</p>
+            </div>
+            <div class="card-action">
+              <a href="#modal" name="modal-edit" v-on:click="updateButton(data.slug)">Update</a>
+              <a href="#" v-on:click="deleteData(data.slug)" name="delete">Delete</a>
+            </div>
+          </div>
+        </div>
+    </div>
+    <!-- modal update -->
+
+    <div id="modal" class="modal modal-fixed-footer">
+      <div class="modal-header">
+        <p>Update</p>
+      </div>
+      <div class="modal-content">
+        <form class="col s12" method="POST">
+          <div class="row center">
+            <div class="input-field col s10">
+              <input id="input-title" type="text" data-length="10" v-bind:value="title" v-model="title">
+              <label for="title">Title</label>
+          </div>
+          <div class="row center">
+            <div class="input-field col s10">
+              <textarea id="input-content" class="materialize-textarea" data-length="120" v-bind:value="content" v-model="content"></textarea>
+              <label for="text">Content</label>
+            </div>
+          </div>
+          </div>
+          <div class="row center">
+            <div class="input-field col s10">
+              <input id="input-category" type="text" data-length="10" v-bind:value="category" v-model="category">
+              <label for="text">Category</label>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn">Close</a>
+        <button id="update-button" type="button" class="waves-effect modal-close waves-light btn" v-on:click="updateArticle(slug)">Update</button>
+      </div>
+     </div>
+   </div>
+  </div>
+
+  <!-- modal input -->
+  <div id="input" class="modal">
+    <div class="modal-content">
+      <div class="row">
+        <form class="col s12" method="POST">
+          <div class="input-field col s6">
+            <input id="title-input" type="text" data-length="10" v-model="title">
+            <label for="title">Title</label>
+          </div>
+          <div class="input-field col s10">
+            <textarea id="content-input" class="materialize-textarea" data-length="120" v-model="content"></textarea>
+            <label for="text">Content</label>
+          </div>
+          <div class="input-field col s6">
+            <input id="category-input" type="text" data-length="10" v-model="category">
+            <label for="category">Category</label>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" id="submit-button" class="waves-effect waves-light btn" v-on:click="createArticle()">Create</button>
+    </div>
+  </div>
+
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://unpkg.com/vue"></script>
+  <script src="js/materialize.js"></script>
+  <script src="js/init.js"></script>
+  <script type="text/javascript">
+  $(document).ready(function(){
+    $('.modal').modal();
+  });
+  </script>
+  <script src="dist/sweetalert.min.js"></script>
+  <script src="/js/script.js"></script>
+  </body>
+</html>
