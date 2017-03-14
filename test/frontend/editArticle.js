@@ -2,22 +2,24 @@ const chai = require('chai');
 const should = chai.should();
 const Nightmare = require('nightmare');
 
-describe(`edit artikel`, function(){
+describe(`Edit an Article`, function(){
   this.timeout(50000);
-  it('should return edited artikel',function(done){
+  it('should return edited article',function(done){
     const nightmare = Nightmare({show: true});
     nightmare
     .goto('http://localhost:8080')
-    .wait('#thumbnail')
+    .wait('#root')
     .click('a[name=modal-edit]')
     .wait('.modal')
-    .click('.modal input[type=text]')
-    .type('.modal input[type=text]', 'juduledit')
-    .click('.modal .materialize-textarea')
-    .type('.modal .materialize-textarea', 'hasiledit')
-    .click('.modal .modal-action')
+    .click('#input-title')
+    .type('#input-title', 'ini judul')
+    .click('#input-content')
+    .type('#input-content', 'ini content baru')
+    .click('#input-category')
+    .type('#input-category', 'ini category')
+    .click('#update-button')
     .evaluate(function(){
-      return document.querySelector('#thumbnail').innerHTML
+      return document.querySelector('#root').innerHTML
     })
     .end()
     .then((result) => {

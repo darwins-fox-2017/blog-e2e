@@ -17,12 +17,7 @@ module.exports = {
     })
   },
   updateArticle: function(req,res){
-    Article.findOneAndUpdate({slug:req.params.slug}, {
-      title: req.body.title,
-      content: req.body.content,
-      category: req.body.category,
-      slug: slug(req.body.title).toLowerCase()
-    }, {new:true}, function(err, data){
+    Article.findOneAndUpdate({slug:req.params.slug},req.body , {new:true}, function(err, data){
       if (err){
         res.send(err)
       }else{
