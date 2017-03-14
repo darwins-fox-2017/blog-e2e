@@ -9,14 +9,14 @@
     <h2>Add new blogpost</h2>
     <el-form ref="form" :model="form" label-width="120px">
         <el-form-item label="Title">
-            <el-input v-model="form.title" @blur="slugIt()"></el-input>
+            <el-input v-model="form.title" @blur="slugIt()" name="title"></el-input>
         </el-form-item>
         <el-form-item label="Content Body">
-            <el-input type="textarea" :rows="2" placeholder="Please input" v-model="form.body">
+            <el-input type="textarea" :rows="2" placeholder="Please input" v-model="form.body" name="body">
             </el-input>
         </el-form-item>
         <el-form-item label="Slug URL">
-            <el-input placeholder="Slug URL" v-model="form.slug">
+            <el-input placeholder="Slug URL" v-model="form.slug" name="slug">
                 <template slot="prepend">Http://dikyarga.com/
                 </template>
             </el-input>
@@ -27,7 +27,7 @@
             </el-switch>
         </el-form-item>
         <el-form-item>
-            <el-button type="primary" @click="onSubmit">Posting blogpost</el-button>
+            <el-button type="primary" @click="onSubmit" name="post blogpost">Posting blogpost</el-button>
             <el-button @click.native="backToList()">Cancel</el-button>
         </el-form-item>
     </el-form>

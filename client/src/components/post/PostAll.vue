@@ -1,9 +1,9 @@
 <template>
 <div class="">
-    <el-button type="primary" @click.native="addItem">Create post</el-button>
+    <el-button type="primary" @click.native="addItem" title="create new post" id="create-new-post">Create post</el-button>
     <br/>
     <br/>
-    <el-table :data="posts" :default-sort="{prop: 'title', order: 'descending'}" style="width: 100%">
+    <el-table :data="posts" :default-sort="{prop: 'createdAt', order: 'descending'}" style="width: 100%">
         <el-table-column prop="title" label="Title" sortable width="180">
         </el-table-column>
         <el-table-column prop="body" label="Body" width="180">
@@ -16,10 +16,12 @@
             <template scope="scope">
         <el-button
           size="small"
+          title="edit blogpost"
           @click="handleEdit(scope.$index, scope.row)">Edit</el-button>
         <el-button
           size="small"
           type="danger"
+          title="delete blogpost"
           @click="handleDelete(scope.$index, scope.row)">Delete</el-button>
 </template>
   </el-table-column>
@@ -30,6 +32,7 @@
 
 <script>
 import axios from 'axios';
+import _ from 'lodash'
 let host = 'http://localhost:3000/api';
 
 export default {
